@@ -12,7 +12,7 @@ var datbaseQuery = globalUtils.DbQuery{
 	Id: map[string]interface{}{
 		"Id": 5,
 	},
-	Table: "CAD_check_status",
+	Table: "cad_check_status",
 	ORMKeyVal: map[string]interface{}{
 		"status_code": 0,
 	},
@@ -22,7 +22,7 @@ var datbaseErrorQuery = globalUtils.DbQuery{
 	DbType: "mysql",
 	Schema: "dwg_transformer",
 	CrudT:  "create",
-	Table:  "CAD_check_errors",
+	Table:  "cad_check_errors",
 	Id: map[string]interface{}{
 		"check_status_id": 6,
 	},

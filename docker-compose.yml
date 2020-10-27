@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: "dwg_transformer"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:

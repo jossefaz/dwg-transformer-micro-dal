@@ -1,2 +1,2 @@
-{"level":"error","msg":"cannot connect to DB: sql: unknown driver \"\" (forgotten import?)","time":"2020-10-27T14:42:01+02:00"}
-":"2020-10-27T14:41:15+02:00"}
+{"level":"error","msg":"any tables allowed correspond to the requested table name","time":"2020-10-27T16:33:40+02:00"}
+{"level":"error","msg":"any tables allowed correspond to the requested table name","time":"2020-10-27T16:33:48+02:00"}

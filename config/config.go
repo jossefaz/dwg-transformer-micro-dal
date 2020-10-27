@@ -3,6 +3,7 @@ package config
 import (
 	"dal/model"
 	"fmt"
+	"os"
 
 	"github.com/tkanos/gonfig"
 	"github.com/yossefaz/dwg-transformer-micro-utils/utils"
@@ -33,6 +34,7 @@ var configEnv = map[string]string{
 
 func GetConfig(env string) {
 	configuration := Configuration{}
+	fmt.Println(os.Getwd())
 	err := gonfig.GetConf(configEnv[env], &configuration)
 	if err != nil {
 		fmt.Println("Cannot read config file")
