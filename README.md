@@ -54,12 +54,7 @@ Based on the **$DEV_PROD** variable, there is two configuration files.
 
 ## Dependencies
 
-This service, as the orchestrator, is dependent on at least 4 others services to run correctly, an do the job.
-
- 1. **DAL** service : implement access to the dwg database.
- 2. **transformer** service : responsible to convert the DWG files to DXF or others format
- 3. **worker** service : will perform validity check on the converted file
- 4. **Message Broker** service  : responsible for the communication between microservices
+ 1. **Message Broker** service  : responsible for the communication between microservices. The DAL will receive request and send back response through messages. Currently there is no implementation of REST API. so the DAL is only accessible through message broker
 
 
 ## Flow
