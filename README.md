@@ -4,14 +4,10 @@
 ---
 
 <h1 id="dwg-transformer--dal">Dwg-transformer : DAL</h1>
-<p>This module is a part of the dwg-transformer-microservice tool. It’s called the <strong>DAL</strong> because he is responsible for accessing the database (in our hybrid architecture for the moment there is only one DB because other microservices do not require any storing, they just need metadata to indicates which files they have to convert/deal with)</p>
+<p>This module is a part of the dwg-transformer-microservice tool. It’s called the  <strong>DAL</strong>  because he is responsible for accessing the database (in our hybrid architecture for the moment there is only one DB because other microservices do not require any storing, they just need metadata to indicates which files they have to convert/deal with)</p>
 <h1 id="configuration">Configuration</h1>
-<p>Some environment variables must be set before running this program :</p>
-<p><strong>$DEV_PROD</strong> :  define the environment. Must be set to one of those values : “prod” / “dev”, depending on the configuration files that you rely on.</p>
-<p><strong>$DB</strong>  : define the which database to look for the data (currently the only db configured in the DAL service is “mysql but it is extremly simple to add more)</p>
-<p><strong>$SCHEMA</strong>  : define the schema’s name in which the DAL will look up for data (“dwg_transformer” is the schema defined in the init.sql of the DAL service for the current version)</p>
-<p><strong>$CAD_STATUS</strong>  : define the table name which stores the dwg files metadata to check</p>
-<p><strong>$CAD_ERRORS</strong>  : define the table name which stores different errors that occured on dwg files checking</p>
+<p>Only one environment variables must be set before running this program :</p>
+<p><strong>$DEV_PROD</strong>  : define the environment. Must be set to one of those values : “prod” / “dev”, depending on the configuration files that you rely on.</p>
 <ol>
 <li>config.prod.json (for production)</li>
 <li>config.dev.json (for dev)</li>
@@ -32,17 +28,18 @@
 		  }  
   }  
 }
+
 </code></pre>
-<p><strong>Queue</strong> : define which message broker will be used and how to connect to it. Here is an example with RabbitMQ connection string to localhost.<br>
-—&gt; <strong>ConnString</strong> : the connection string to the queue<br>
-—&gt; <strong>QueueNames</strong> : the queues that this service will open ( if not exists) an publish to them<br>
-—&gt; <strong>Listennig</strong> : the queues that this service will subscribe and listen for messages</p>
-<p><strong>Logs</strong> : define differents logger foile for the service log. Currently, the service is using <a href="https://github.com/sirupsen/logrus"><strong>logrus</strong></a> library but it could change in future versions.<br>
-—&gt; <strong>Path</strong> : define the log file location<br>
-—&gt; <strong>Level</strong> : Log level for this file</p>
+<p><strong>Queue</strong>  : define which message broker will be used and how to connect to it. Here is an example with RabbitMQ connection string to localhost.<br>
+—&gt;  <strong>ConnString</strong>  : the connection string to the queue<br>
+—&gt;  <strong>QueueNames</strong>  : the queues that this service will open ( if not exists) an publish to them<br>
+—&gt;  <strong>Listennig</strong>  : the queues that this service will subscribe and listen for messages</p>
+<p><strong>Logs</strong>  : define differents logger foile for the service log. Currently, the service is using  <a href="https://github.com/sirupsen/logrus"><strong>logrus</strong></a>  library but it could change in future versions.<br>
+—&gt;  <strong>Path</strong>  : define the log file location<br>
+—&gt;  <strong>Level</strong>  : Log level for this file</p>
 <h2 id="dependencies">Dependencies</h2>
 <p>This service is dependent on at least 1 others services to run correctly, an do the job.</p>
 <ol>
-<li><strong>Message Broker</strong> service  : responsible for the communication between microservices</li>
+<li><strong>Message Broker</strong>  service : responsible for the communication between microservices</li>
 </ol>
 
