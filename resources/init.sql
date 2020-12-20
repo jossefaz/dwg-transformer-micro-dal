@@ -1,11 +1,11 @@
-create table if not exists cad_check_errors
+create table if not exists CAD_check_errors
 (
     check_status_id int not null
         primary key,
     error_code      int not null
 );
 
-create table if not exists cad_check_status
+create table if not exists CAD_check_status
 (
     ID          int auto_increment
         primary key,

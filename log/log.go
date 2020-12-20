@@ -3,8 +3,8 @@ package log
 import (
 	"fmt"
 
-	"github.com/yossefaz/dwg-transformer-micro-utils/logs"
-	"github.com/yossefaz/dwg-transformer-micro-utils/utils"
+	"github.com/jossefaz/dwg-transformer-micro-utils/logs"
+	"github.com/jossefaz/dwg-transformer-micro-utils/utils"
 	"github.com/tkanos/gonfig"
 )
 

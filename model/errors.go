@@ -2,7 +2,7 @@ package model
 
 import (
 	"encoding/json"
-	tables "github.com/yossefaz/go_struct"
+	tables "github.com/jossefaz/dwg-transformer-micro-data-struct"
 	"reflect"
 )
 

@@ -3,8 +3,8 @@ package model
 import (
 	"testing"
 
-	"github.com/yossefaz/dwg-transformer-micro-utils/test"
-	globalUtils "github.com/yossefaz/dwg-transformer-micro-utils/utils"
+	"github.com/jossefaz/dwg-transformer-micro-utils/test"
+	globalUtils "github.com/jossefaz/dwg-transformer-micro-utils/utils"
 )
 
 var datbaseQuery = globalUtils.DbQuery{
@@ -34,6 +34,11 @@ var datbaseErrorQuery = globalUtils.DbQuery{
 
 func TestConnectToDb(t *testing.T) {
 	_, err := ConnectToDb("mysql", "root:Dev123456!@(localhost)/dwg_transformer?charset=utf8&parseTime=True&loc=Local")
+	test.Ok(t, err)
+}
+
+func TestConnectToDbMSServer(t *testing.T) {
+	_, err := ConnectToDb("mssql", "root:Dev123456!@(localhost)/dwg_transformer?charset=utf8&parseTime=True&loc=Local")
 	test.Ok(t, err)
 }
 

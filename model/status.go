@@ -2,7 +2,7 @@ package model
 
 import (
 	"fmt"
-	tables "github.com/yossefaz/go_struct"
+	tables "github.com/jossefaz/dwg-transformer-micro-data-struct"
 )
 
 func StatusUpdate(db *CDb, where map[string]interface{}, update map[string]interface{}) ([]byte, error) {

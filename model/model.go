@@ -6,10 +6,12 @@ import (
 	"strings"
 	"time"
 
-	globalUtils "github.com/yossefaz/dwg-transformer-micro-utils/utils"
 	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/jinzhu/gorm/dialects/mssql"
+	"github.com/jossefaz/dwg-transformer-micro-dal/log"
 	"github.com/jinzhu/gorm"
-	tables "github.com/yossefaz/go_struct"
+	tables "github.com/jossefaz/dwg-transformer-micro-data-struct"
+	globalUtils "github.com/jossefaz/dwg-transformer-micro-utils/utils"
 )
 
 type CDb struct {
@@ -41,12 +43,15 @@ func ConnectToDb(dialect string, connString string) (*CDb, error) {
 		return &CDb{}, err
 	}
 	db.DB()
-	db.DB().Ping()
-	var dup = CDb{db}
+	if err := db.DB().Ping(); err!= nil {
+		log.Logger.Log.Error("Cannot communicate with the database. Please check connection string")
+	}
+	dup := CDb{db}
 	return &dup, nil
 }
 
 func (db *CDb) RetrieveRow(dbQ *globalUtils.DbQuery) ([]byte, error) {
+
 	switch dbQ.Table {
 	case "CAD_check_status":
 		status := []tables.Cad_check_status{}

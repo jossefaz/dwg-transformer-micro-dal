@@ -1,12 +1,12 @@
 package config
 
 import (
-	"dal/model"
+	"github.com/jossefaz/dwg-transformer-micro-dal/model"
 	"fmt"
 	"os"
 
+	"github.com/jossefaz/dwg-transformer-micro-utils/utils"
 	"github.com/tkanos/gonfig"
-	"github.com/yossefaz/dwg-transformer-micro-utils/utils"
 )
 
 var LocalConfig Configuration
@@ -22,6 +22,9 @@ type Configuration struct {
 	} `json:"Queue"`
 	DB struct {
 		Mysql struct {
+			Schema map[string]model.Schema
+		} `json:"Mysql"`
+		Mssql struct {
 			Schema map[string]model.Schema
 		} `json:"Mysql"`
 	} `json:"DB"`

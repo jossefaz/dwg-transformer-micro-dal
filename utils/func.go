@@ -1,17 +1,17 @@
 package utils
 
 import (
-	"dal/config"
-	"dal/log"
-	"dal/model"
+	"github.com/jossefaz/dwg-transformer-micro-dal/config"
+	"github.com/jossefaz/dwg-transformer-micro-dal/log"
+	"github.com/jossefaz/dwg-transformer-micro-dal/model"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
 
 	"github.com/streadway/amqp"
-	"github.com/yossefaz/dwg-transformer-micro-utils/queue"
-	globalUtils "github.com/yossefaz/dwg-transformer-micro-utils/utils"
+	"github.com/jossefaz/dwg-transformer-micro-utils/queue"
+	globalUtils "github.com/jossefaz/dwg-transformer-micro-utils/utils"
 )
 
 func HandleError(err error, msg string, exit bool) {
