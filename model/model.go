@@ -8,8 +8,8 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
-	"github.com/jossefaz/dwg-transformer-micro-dal/log"
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/sqlserver"
+	"gorm.io/gorm"
 	tables "github.com/jossefaz/dwg-transformer-micro-data-struct"
 	globalUtils "github.com/jossefaz/dwg-transformer-micro-utils/utils"
 )
@@ -38,14 +38,11 @@ func HandleDBErrors(errs []error) error {
 }
 
 func ConnectToDb(dialect string, connString string) (*CDb, error) {
-	db, err := gorm.Open(dialect, connString)
+	db, err := gorm.Open(sqlserver.Open(connString), &gorm.Config{})
 	if err != nil {
 		return &CDb{}, err
 	}
 	db.DB()
-	if err := db.DB().Ping(); err!= nil {
-		log.Logger.Log.Error("Cannot communicate with the database. Please check connection string")
-	}
 	dup := CDb{db}
 	return &dup, nil
 }

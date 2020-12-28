@@ -39,7 +39,6 @@ func MessageReceiver(m amqp.Delivery, rmq *queue.Rabbitmq) {
 			"Type": dbQ.CrudT,
 		})
 	}
-	defer db.Close()
 }
 
 func dispatcher(db *model.CDb, dbQ *globalUtils.DbQuery) ([]byte, error) {

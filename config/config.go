@@ -26,7 +26,7 @@ type Configuration struct {
 		} `json:"Mysql"`
 		Mssql struct {
 			Schema map[string]model.Schema
-		} `json:"Mysql"`
+		} `json:"Mssql"`
 	} `json:"DB"`
 }
 

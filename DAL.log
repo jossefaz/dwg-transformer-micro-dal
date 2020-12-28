@@ -1,5 +1,5 @@
-{"level":"error","msg":"Error Occured when RabbitMQ Init: dial tcp 127.0.0.1:5672: connect: connection refused","time":"2020-12-17T10:49:30+02:00"}
- 1146: Table 'dwg_transformer.CAD_check_status' doesn't exist\n","time":"2020-12-16T14:28:19+02:00"}
+{"level":"error","msg":"cannot connect to DB: Unable to open tcp connection with host 'localhost:1433': dial tcp 127.0.0.1:1433: connect: connection refused","time":"2020-12-27T17:34:24+02:00"}
+' doesn't exist\n","time":"2020-12-16T14:28:19+02:00"}
 51+02:00"}
 {"level":"error","msg":"Error 1146: Table 'dwg_transformer.CAD_check_status' doesn't exist\n","time":"2020-12-16T14:25:51+02:00"}
 {"level":"error","msg":"Error 1146: Table 'dwg_transformer.CAD_check_status' doesn't exist\n","time":"2020-12-16T14:25:51+02:00"}
