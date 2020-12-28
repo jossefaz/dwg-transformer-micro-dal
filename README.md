@@ -6,8 +6,9 @@
 <h1 id="dwg-transformer--dal">Dwg-transformer : DAL</h1>
 <p>This module is a part of the dwg-transformer-microservice tool. It’s called the  <strong>DAL</strong>  because he is responsible for accessing the database (in our hybrid architecture for the moment there is only one DB because other microservices do not require any storing, they just need metadata to indicates which files they have to convert/deal with)</p>
 <h1 id="configuration">Configuration</h1>
-<p>Only one environment variables must be set before running this program :</p>
+<p>Only two environment variables must be set before running this program :</p>
 <p><strong>$DEV_PROD</strong>  : define the environment. Must be set to one of those values : “prod” / “dev”, depending on the configuration files that you rely on.</p>
+<p><strong>$LOOKUP_ERRORS_SQL</strong>  : define the SQL to get the look up table of the check errors</p>
 <ol>
 <li>config.prod.json (for production)</li>
 <li>config.dev.json (for dev)</li>
