@@ -7,8 +7,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"gorm.io/driver/sqlserver"
-	"gorm.io/gorm"
 	"os"
 
 	"github.com/streadway/amqp"
@@ -26,24 +24,36 @@ func HandleError(err error, msg string, exit bool) {
 }
 
 func MessageReceiver(m amqp.Delivery, rmq *queue.Rabbitmq) {
-
 	dbQ, err := unpackMessage(m)
 	HandleError(err, "cannot unpack message received in DAL to DB", err != nil)
 	dbconf := config.GetDBConf(dbQ.DbType, dbQ.Schema)
-	db, err := gorm.Open(sqlserver.Open(dbconf.ConnString), &gorm.Config{})
-	sqlDB, err := db.DB()
-	HandleError(err, "Cannot connect to DB", true)
-	defer sqlDB.Close()
-	res, err := dispatcher(&model.CDb{DB: db}, dbQ)
-	if err != nil {
-		log.Logger.Log.Error(err)
+	cdb, err := model.ConnectToDb(dbconf.Dialect, dbconf.ConnString)
+	if cdb != nil {
+		connection, err := cdb.DB.DB()
+		HandleError(err, "cannot connect to DB", err != nil)
+		defer func(){
+			if err := connection.Close(); err !=nil {
+				HandleError(err, "Cannot close DB connection", true)
+			}
+		}()
+		res, err := dispatcher(cdb, dbQ)
+		if err != nil {
+			log.Logger.Log.Error(err)
+		} else {
+			message, err:= rmq.SendMessage(res, "Dal_Res", map[string]interface{}{
+				"From": "DAL",
+				"To":   "Dal_Res",
+				"Type": dbQ.CrudT,
+			})
+			if err != nil {
+				HandleError(err, "Cannot send message to the Queue", false)
+			}
+			log.Logger.Log.Info(fmt.Sprintf("%s", message))
+		}
 	} else {
-		rmq.SendMessage(res, "Dal_Res", map[string]interface{}{
-			"From": "DAL",
-			"To":   "Dal_Res",
-			"Type": dbQ.CrudT,
-		})
+		log.Logger.Log.Error(fmt.Sprintf("Cannot open connection with database check connection string or network error : %s", err.Error()))
 	}
+
 }
 
 func dispatcher(db *model.CDb, dbQ *globalUtils.DbQuery) ([]byte, error) {
