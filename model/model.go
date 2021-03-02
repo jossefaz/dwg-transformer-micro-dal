@@ -42,7 +42,6 @@ func ConnectToDb(dialect string, connString string) (*CDb, error) {
 	if err != nil {
 		return &CDb{}, err
 	}
-	db.DB()
 	dup := CDb{db}
 	return &dup, nil
 }

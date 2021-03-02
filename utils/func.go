@@ -7,6 +7,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"gorm.io/driver/sqlserver"
+	"gorm.io/gorm"
 	"os"
 
 	"github.com/streadway/amqp"
@@ -24,12 +26,15 @@ func HandleError(err error, msg string, exit bool) {
 }
 
 func MessageReceiver(m amqp.Delivery, rmq *queue.Rabbitmq) {
+
 	dbQ, err := unpackMessage(m)
 	HandleError(err, "cannot unpack message received in DAL to DB", err != nil)
 	dbconf := config.GetDBConf(dbQ.DbType, dbQ.Schema)
-	db, err := model.ConnectToDb(dbconf.Dialect, dbconf.ConnString)
-	HandleError(err, "cannot connect to DB", err != nil)
-	res, err := dispatcher(db, dbQ)
+	db, err := gorm.Open(sqlserver.Open(dbconf.ConnString), &gorm.Config{})
+	sqlDB, err := db.DB()
+	HandleError(err, "Cannot connect to DB", true)
+	defer sqlDB.Close()
+	res, err := dispatcher(&model.CDb{DB: db}, dbQ)
 	if err != nil {
 		log.Logger.Log.Error(err)
 	} else {
