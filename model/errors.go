@@ -51,7 +51,7 @@ func parsInt(val interface{}) int {
 
 func checkIfExist(db *CDb, id int, errorCode int) bool {
 	atts := tables.CAD_check_errors{}
-	row, err := db.Where(&tables.CAD_check_errors{Check_status_id: id, Error_code: errorCode}).First(&atts).Rows()
+	row, err := db.Where(&tables.CAD_check_errors{Check_Status_Id: id, Error_Code: errorCode}).First(&atts).Rows()
 	if err != nil {
 		return false
 	}
@@ -69,8 +69,8 @@ func ErrorsCreate(db *CDb, FkId map[string]interface{}, keyval map[string]interf
 		errVal := parsInt(errorCode)
 		if !checkIfExist(db, checkId, errVal) {
 			atts := tables.CAD_check_errors{}
-			atts.Check_status_id = checkId
-			atts.Error_code = errVal
+			atts.Check_Status_Id = checkId
+			atts.Error_Code = errVal
 			_, err := Create(atts, db)
 			HandleDBErrors([]error{err})
 		}
